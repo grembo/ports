@@ -1,5 +1,5 @@
 # Created by: Stijn Hoop <stijn@win.tue.nl>
-# $FreeBSD: head/emulators/zsnes/Makefile 329271 2013-10-04 08:52:32Z bapt $
+# $FreeBSD: head/emulators/zsnes/Makefile 356157 2014-06-01 17:06:55Z grembo $
 
 PORTNAME=	zsnes
 PORTVERSION=	1.51
@@ -18,8 +18,6 @@ LIB_DEPENDS=	libpng15.so:${PORTSDIR}/graphics/png
 
 ONLY_FOR_ARCHS=	i386
 ONLY_FOR_ARCHS_REASON=	non-portable, for a portable emulator see emulators/snes9x
-
-USE_GCC?=	yes
 
 WRKSRC=		${WRKDIR}/${PORTNAME}_${PORTVERSION:S/./_/}/src
 
@@ -81,16 +79,6 @@ post-patch:
 			${WRKSRC}/Makefile.in
 	@${REINPLACE_CMD} -i "" -e \
 		's|-O3||g' ${WRKSRC}/${CONFIGURE_SCRIPT}
-	@${REINPLACE_CMD} -e \
-		 's|main(size_t argc|main(int argc|g' \
-			${WRKSRC}/tools/macroll.cpp \
-			${WRKSRC}/tools/objprefx.cpp \
-			${WRKSRC}/tools/depbuild.cpp \
-			${WRKSRC}/tools/varrep.cpp \
-			${WRKSRC}/tools/extraext.cpp \
-			${WRKSRC}/tools/minwhite.cpp \
-			${WRKSRC}/tools/nreplace.cpp \
-			${WRKSRC}/parsegen.cpp
 
 do-install:
 	${INSTALL_PROGRAM} ${WRKSRC}/zsnes ${STAGEDIR}${PREFIX}/bin
