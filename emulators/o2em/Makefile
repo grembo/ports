@@ -17,7 +17,6 @@ LIB_DEPENDS=		alleg:${PORTSDIR}/devel/allegro
 
 WRKSRC=			${WRKDIR}/o2em117src
 MAKEFILE=		Makefile.freebsd
-USE_GCC=		yes
 USES=			gmake zip
 LDFLAGS+=		${PTHREAD_LIBS}
 
