@@ -1,0 +1,33 @@
+# Created by: Patrick Tracanelli <eksffa@freebsdbrasil.com.br>
+# $FreeBSD: head/mail/qmail-auditor/Makefile 340722 2014-01-22 17:00:46Z mat $
+
+PORTNAME=	qmail-auditor
+PORTVERSION=	0.47
+PORTREVISION=	1
+CATEGORIES=	mail
+MASTER_SITES=	http://www6.freebsdbrasil.com.br/~eksffa/l/qmail-auditor/
+
+MAINTAINER=	eksffa@freebsdbrasil.com.br
+COMMENT=	Selective e-mail auditing for qmail by means of qmail-queue wrapping
+
+WRKSRC=		${WRKDIR}/${PORTNAME:R}
+
+USES=		qmail:run
+GNU_CONFIGURE=	yes
+
+SUB_FILES=	pkg-message
+SUB_LIST=	QMAIL_PREFIX=${QMAIL_PREFIX}
+
+.include <bsd.port.pre.mk>
+
+post-patch:
+	@${REINPLACE_CMD} -e 's|/usr/local|${STAGEDIR}${PREFIX}|g' \
+	${WRKSRC}/src/Makefile.in
+
+post-install:
+.if !defined(NOPORTDOCS)
+	@${MKDIR} ${STAGEDIR}${DOCSDIR}
+	@${INSTALL_DATA} ${WRKSRC}/README ${STAGEDIR}${DOCSDIR}
+.endif
+
+.include <bsd.port.post.mk>

@@ -1,0 +1,8 @@
+bin/qmail-notify
+%%EXAMPLESDIR%%/cron.hourly
+%%EXAMPLESDIR%%/message.txt
+@dirrm %%EXAMPLESDIR%%
+%%PORTDOCS%%%%DOCSDIR%%/NEWS
+%%PORTDOCS%%%%DOCSDIR%%/README
+%%PORTDOCS%%%%DOCSDIR%%/TODO
+%%PORTDOCS%%@dirrm %%DOCSDIR%%
