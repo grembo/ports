@@ -79,6 +79,16 @@ post-patch:
 			${WRKSRC}/Makefile.in
 	@${REINPLACE_CMD} -i "" -e \
 		's|-O3||g' ${WRKSRC}/${CONFIGURE_SCRIPT}
+	@${REINPLACE_CMD} -e \
+		 's|main(size_t argc|main(int argc|g' \
+			${WRKSRC}/tools/macroll.cpp \
+			${WRKSRC}/tools/objprefx.cpp \
+			${WRKSRC}/tools/depbuild.cpp \
+			${WRKSRC}/tools/varrep.cpp \
+			${WRKSRC}/tools/extraext.cpp \
+			${WRKSRC}/tools/minwhite.cpp \
+			${WRKSRC}/tools/nreplace.cpp \
+			${WRKSRC}/parsegen.cpp
 
 do-install:
 	${INSTALL_PROGRAM} ${WRKSRC}/zsnes ${STAGEDIR}${PREFIX}/bin
