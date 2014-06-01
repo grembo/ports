@@ -19,6 +19,8 @@ LIB_DEPENDS=	libpng15.so:${PORTSDIR}/graphics/png
 ONLY_FOR_ARCHS=	i386
 ONLY_FOR_ARCHS_REASON=	non-portable, for a portable emulator see emulators/snes9x
 
+USE_GCC?=	yes
+
 WRKSRC=		${WRKDIR}/${PORTNAME}_${PORTVERSION:S/./_/}/src
 
 NO_OPTIONS_SORT=yes
