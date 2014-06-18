@@ -14,7 +14,7 @@ LICENSE=	GPLv2
 BUILD_DEPENDS=	${LOCALBASE}/include/boost/version.hpp:${PORTSDIR}/devel/boost-libs
 
 USE_GNOME=	libglade2
-USES=		tar:bzip2 iconv pkgconfig scons
+USES=		iconv pkgconfig scons tar:bzip2
 USE_OPENSSL=	yes
 PORTDOCS=	*
 DESTDIRNAME=	FAKE_ROOT
@@ -29,13 +29,8 @@ MAKE_ARGS+=	debug=1
 CFLAGS+=	-I${LOCALBASE}/include
 LDFLAGS+=	-L${LOCALBASE}/lib
 
-.include <bsd.port.options.mk>
-
-.if ${PORT_OPTIONS:MNOTIFY}
-LIB_DEPENDS+=	libnotify.so:${PORTSDIR}/devel/libnotify
-.else
-MAKE_ARGS+=	libnotify=0
-.endif
+NOTIFY_LIB_DEPENDS=	libnotify.so:${PORTSDIR}/devel/libnotify
+NOTIFY_MAKE_ARGS_OFF=	libnotify=0
 
 post-patch:
 	@${REINPLACE_CMD} -e "s/'iconv'/'${ICONV_LIB:S/-l//}'/" \
