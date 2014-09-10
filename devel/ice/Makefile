@@ -19,7 +19,7 @@ LIB_DEPENDS=		libexpat.so:${PORTSDIR}/textproc/expat2 \
 			libmcpp.so:${PORTSDIR}/devel/mcpp
 .else
 LIB_VRS=		${PORTVERSION:S|.||g:C|[0-9]$||}
-LIB_DEPENDS?=		libIce.so.${LIB_VRS}:${PORTSDIR}/devel/ice
+LIB_DEPENDS+=		libIce.so.${LIB_VRS}:${PORTSDIR}/devel/ice
 PLIST_SUB+=		LIB_VERSION="${PORTVERSION}" LIB_VRS="${LIB_VRS}"
 .endif
 
@@ -30,7 +30,7 @@ DEMOS_DESC?=		Build demos
 
 .include <bsd.port.options.mk>
 
-USES=			iconv gmake
+USES+=			iconv gmake
 
 .if ${PORT_OPTIONS:MTESTS} && ${SLAVE_PORT} == "no"
 USES+=			python:build
