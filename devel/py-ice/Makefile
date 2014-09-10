@@ -13,6 +13,7 @@ BUILD_DEPENDS=	mcpp:${PORTSDIR}/devel/mcpp \
 		slice2py:${PORTSDIR}/devel/ice
 
 USES=		python
+SLAVE_PORT=	yes
 MASTERDIR=	${.CURDIR}/../ice
 PLIST=		${.CURDIR}/pkg-plist
 

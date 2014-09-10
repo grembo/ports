@@ -12,6 +12,8 @@ COMMENT=		Modern alternative to object middleware such as CORBA/COM/DCOM/COM+
 
 LICENSE=		GPLv2
 
+SLAVE_PORT?=		no
+
 .if ${SLAVE_PORT} == "no"
 LIB_DEPENDS=		libexpat.so:${PORTSDIR}/textproc/expat2 \
 			libmcpp.so:${PORTSDIR}/devel/mcpp
