@@ -1,8 +1,9 @@
 # Created by: Stefan Ehmann <shoesoft@gmx.net>
-# $FreeBSD: head/devel/ice/Makefile 339196 2014-01-09 01:57:20Z mandree $
+# $FreeBSD: head/devel/ice/Makefile 366434 2014-08-28 16:56:19Z amdmi3 $
 
 PORTNAME=		Ice
 PORTVERSION=		3.5.1
+PORTREVISION=		3
 CATEGORIES=		devel
 MASTER_SITES=		http://download.zeroc.com/Ice/3.5/
 
@@ -19,9 +20,6 @@ OPTIONS_DEFAULT?=	DEMOS TESTS
 TESTS_DESC?=		Build and run tests (requires lang/python)
 DEMOS_DESC?=		Build demos
 
-WITH_SSP=		YES
-WITH_SSP_PORTS=		YES
-
 .include <bsd.port.options.mk>
 
 .if ${PORT_OPTIONS:MTESTS}
@@ -29,7 +27,8 @@ USE_PYTHON_BUILD=	yes
 .endif
 
 USES=			iconv gmake
-USE_BDB=		5
+USE_BDB=		yes
+WANT_BDB_VER=		5
 INVALID_BDB_VER=	40 41 42 43 44 46 47 48 6
 USE_LDCONFIG=		yes
 BUILD_WRKSRC?=		${WRKSRC}/cpp
