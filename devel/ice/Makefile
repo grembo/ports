@@ -18,8 +18,8 @@ SLAVE_PORT?=		no
 LIB_DEPENDS=		libexpat.so:${PORTSDIR}/textproc/expat2 \
 			libmcpp.so:${PORTSDIR}/devel/mcpp
 .else
-LIB_DEPENDS=		libIce.so.${LIB_VRS}:${PORTSDIR}/devel/ice
 LIB_VRS=		${PORTVERSION:S|.||g:C|[0-9]$||}
+LIB_DEPENDS?=		libIce.so.${LIB_VRS}:${PORTSDIR}/devel/ice
 PLIST_SUB+=		LIB_VERSION="${PORTVERSION}" LIB_VRS="${LIB_VRS}"
 .endif
 
