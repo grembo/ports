@@ -12,8 +12,14 @@ COMMENT=		Modern alternative to object middleware such as CORBA/COM/DCOM/COM+
 
 LICENSE=		GPLv2
 
+.if ${SLAVE_PORT} == "no"
 LIB_DEPENDS=		libexpat.so:${PORTSDIR}/textproc/expat2 \
 			libmcpp.so:${PORTSDIR}/devel/mcpp
+.else
+LIB_DEPENDS=		libIce.so.${LIB_VRS}:${PORTSDIR}/devel/ice
+LIB_VRS=		${PORTVERSION:S|.||g:C|[0-9]$||}
+PLIST_SUB+=		LIB_VERSION="${PORTVERSION}" LIB_VRS="${LIB_VRS}"
+.endif
 
 OPTIONS_DEFINE?=	DEBUG DEMOS DOCS TESTS
 OPTIONS_DEFAULT?=	DEMOS TESTS
@@ -22,11 +28,12 @@ DEMOS_DESC?=		Build demos
 
 .include <bsd.port.options.mk>
 
-.if ${PORT_OPTIONS:MTESTS}
-USE_PYTHON_BUILD=	yes
+USES=			iconv gmake
+
+.if ${PORT_OPTIONS:MTESTS} && ${SLAVE_PORT} == "no"
+USES+=			python:build
 .endif
 
-USES=			iconv gmake
 USE_BDB=		yes
 WANT_BDB_VER=		5
 INVALID_BDB_VER=	40 41 42 43 44 46 47 48 6
