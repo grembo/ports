@@ -1,5 +1,5 @@
 # Created by: Stefan Ehmann <shoesoft@gmx.net>
-# $FreeBSD: head/devel/ice/Makefile 366434 2014-08-28 16:56:19Z amdmi3 $
+# $FreeBSD: head/devel/ice/Makefile 368054 2014-09-12 18:06:17Z grembo $
 
 PORTNAME=		Ice
 PORTVERSION=		3.5.1
@@ -86,7 +86,7 @@ PLIST_SUB+=	PYTHONPRE32=""
 
 PLIST_SUB+=	PYTHON_SUFFIX=${PYTHON_SUFFIX}
 
-.if ${PREFIX} != ${LOCALBASE} && !defined(NO_STAGE)
+.if ${PREFIX} != ${LOCALBASE}
 PYSITEDIR=	${PREFIX}${PYTHON_SITELIBDIR:S|^${LOCALBASE}||}
 .else
 PYSITEDIR=	${PYTHON_SITELIBDIR}
