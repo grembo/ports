@@ -46,6 +46,7 @@ BUILD_WRKSRC?=		${WRKSRC}/cpp
 INSTALL_WRKSRC?=	${WRKSRC}/cpp
 
 CFLAGS+=		-ftemplate-depth-128 -fPIC -DPIC -Wall -D_REENTRANT -I${LOCALBASE}/include
+CPPFLAGS+=		-I${ICONV_PREFIX}/include
 .if ${PORT_OPTIONS:MDEBUG}
 CFLAGS+=		-g
 .else
