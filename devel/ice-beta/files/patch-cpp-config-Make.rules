@@ -1,0 +1,13 @@
+--- cpp.orig/config/Make.rules~	2015-01-23 12:14:28.000000000 +0000
++++ cpp/config/Make.rules	2015-01-23 12:17:10.528877874 +0000
+@@ -249,7 +249,9 @@
+ 		  DB_FLAGS          = -I/usr/local/include/db53
+ 		  DB_LIBS           = -L/usr/local/$(libsubdir)/db53 -ldb_cxx
+ 	  else
+-		DB_LIBS      = -ldb_cxx
++		DB_FLAGS          = -I%%BDB_INCLUDE_DIR%%
++		DB_LIBS           = -L%%BDB_LIB_DIR%% -l%%BDB_LIB_CXX_NAME%%
++		DB_RPATH_LINK     = $(call rpathlink,%%BDB_LIB_DIR%%)
+ 	  endif
+    endif
+ endif

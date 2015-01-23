@@ -1,0 +1,24 @@
+--- cpp.orig/Makefile	2014-12-15 08:04:51.000000000 +0000
++++ cpp/Makefile	2015-01-23 12:11:13.538243154 +0000
+@@ -13,11 +13,16 @@
+ 
+ SUBDIRS		= config src include
+ 
+-ifneq ($(MAKECMDGOALS),install)
+-    SUBDIRS		:= $(SUBDIRS) test
+-    ifeq ($(shell uname | grep MINGW),)
+-        SUBDIRS		:= $(SUBDIRS) demo
+-    endif
++ifeq ($(NOTESTS),)
++	SUBDIRS		:= $(SUBDIRS) test
++endif
++
++ifeq ($(NODEMOS),)
++	SUBDIRS		:= $(SUBDIRS) demo
++endif
++
++ifeq ($(NOICEDOCS),)
++	SUBDIRS		:= $(SUBDIRS) doc
+ endif
+ 
+ INSTALL_SUBDIRS	= $(install_bindir) $(install_libdir)$(cpp11libdirsuffix) $(install_includedir) \
