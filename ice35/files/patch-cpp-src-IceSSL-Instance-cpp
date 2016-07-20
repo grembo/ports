@@ -1,0 +1,12 @@
+--- cpp/src/IceSSL/Instance.cpp.orig	2016-07-20 13:34:58.516569037 +0000
++++ cpp/src/IceSSL/Instance.cpp	2016-07-20 13:35:51.203569452 +0000
+@@ -274,7 +274,9 @@
+             string entropyDaemon = properties->getProperty("IceSSL.EntropyDaemon");
+             if(!entropyDaemon.empty())
+             {
++#	ifndef OPENSSL_NO_EGD
+                 if(RAND_egd(entropyDaemon.c_str()) <= 0)
++#	endif
+                 {
+                     PluginInitializationException ex(__FILE__, __LINE__);
+                     ex.reason = "IceSSL: EGD failure using file " + entropyDaemon;

@@ -1,0 +1,11 @@
+--- cpp/src/IceSSL/Makefile.orig	2013-10-04 15:48:14.000000000 +0000
++++ cpp/src/IceSSL/Makefile	2016-07-20 13:13:12.354566643 +0000
+@@ -42,7 +42,7 @@
+ CPPFLAGS	:= -I.. $(CPPFLAGS) -DICE_SSL_API_EXPORTS $(OPENSSL_FLAGS)
+ SLICE2CPPFLAGS	:= --ice --include-dir IceSSL --dll-export ICE_SSL_API $(SLICE2CPPFLAGS)
+ 
+-LINKWITH        := $(BZIP2_RPATH_LINK) -lIce -lIceUtil $(OPENSSL_LIBS) $(CXXLIBS)
++LINKWITH        := $(BZIP2_RPATH_LINK) -lIce -lIceUtil $(OPENSSL_RPATH_LINK) $(SSL_OS_LIBS) $(CXXLIBS)
+ 
+ ifeq ($(STATICLIBS),yes)
+ $(libdir)/$(LIBNAME): $(OBJS)

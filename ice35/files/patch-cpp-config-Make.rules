@@ -1,0 +1,43 @@
+--- cpp/config/Make.rules.orig	2013-10-04 15:48:15.000000000 +0000
++++ cpp/config/Make.rules	2016-07-20 14:32:11.645566691 +0000
+@@ -187,10 +187,8 @@
+ include	 $(top_srcdir)/config/Make.rules.$(UNAME)
+ 
+ install_includedir	:= $(prefix)/include
+-install_docdir		:= $(prefix)/doc
+ install_bindir	  	:= $(prefix)/$(binsubdir)$(cpp11suffix)
+ install_libdir	  	:= $(prefix)/$(libsubdir)$(cpp11suffix)
+-install_configdir 	:= $(prefix)/config
+ 
+ ifneq ($(prefix),/usr)
+ install_mandir		:= $(prefix)/man/man1
+@@ -208,11 +206,15 @@
+     ICEUTIL_FLAGS           = -DICE_PRIO_INHERIT
+ endif
+ 
+-OPENSSL_FLAGS           += $(if $(OPENSSL_HOME),-I$(OPENSSL_HOME)/include)
++OPENSSL_FLAGS           += -I/usr/local/include
+ ifeq ($(OPENSSL_LIBS),)
+-    OPENSSL_LIBS            = $(if $(OPENSSL_HOME),-L$(OPENSSL_HOME)/$(libsubdir)) -lssl -lcrypto
++    OPENSSL_LIBS      = -L/usr/local/lib -lssl -lcrypto
++endif
++OPENSSL_RPATH_LINK      = $(if /usr/local/lib,$(call rpathlink,/usr/local/lib))
++
++ifeq ($(SSL_OS_LIBS),)
++	SSL_OS_LIBS = $(OPENSSL_LIBS)
+ endif
+-OPENSSL_RPATH_LINK      = $(if $(OPENSSL_HOME),$(call rpathlink,$(OPENSSL_HOME)/$(libsubdir)))
+ 
+ BZIP2_FLAGS             = $(if $(BZIP2_HOME),-I$(BZIP2_HOME)/include)
+ ifeq ($(BZIP2_LIBS),)
+@@ -239,7 +241,9 @@
+           DB_FLAGS          = -I/usr/local/include/db53
+           DB_LIBS           = -L/usr/local/$(libsubdir)/db53 -ldb_cxx
+       else
+-        DB_LIBS      = -ldb_cxx
++        DB_FLAGS          = -I/usr/local/include/db5
++        DB_LIBS           = -L/usr/local/lib/db5 -ldb_cxx-5.3
++        DB_RPATH_LINK     = $(call rpathlink,/usr/local/lib/db5)
+       endif
+    endif
+ endif
